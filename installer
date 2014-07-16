@@ -79,9 +79,6 @@ brew cask install firefox
 echo "install iterm2"
 brew cask install iterm2
 
-echo "install alfred"
-brew cask install alfred
-
 echo "change the default shell to zsh"
 chsh -s /bin/zsh
 
