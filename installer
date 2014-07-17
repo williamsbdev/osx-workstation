@@ -79,6 +79,15 @@ brew cask install firefox
 echo "install iterm2"
 brew cask install iterm2
 
+echo "install pckeyboardhack"
+brew cask install pckeyboardhack
+
+echo "install sizeup"
+brew cask install sizeup
+
+echo "install flux"
+brew cask install flux
+
 echo "change the default shell to zsh"
 chsh -s /bin/zsh
 
