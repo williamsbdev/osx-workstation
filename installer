@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "installing homebrew"
-ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go/install)"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew doctor
 brew update
 
@@ -23,48 +23,42 @@ echo "install the fundamentals"
 brew install tig
 brew install libjpeg
 brew install tree
-brew install node
-brew install phantomjs
 brew install ack
 brew install tmux
+brew install htop
+brew install the_silver_searcher
 brew install postgresql
-brew install mysql
 brew install memcached
-brew install reattach-to-user-namespace
+brew install zsh-syntax-highlighting
+brew install reattach-to-user-namespace --wrap-pbcopy-and-pbpaste
 
 echo "launch memcached on startup"
 ln -sfv /usr/local/opt/memcached/*.plist ~/Library/LaunchAgents
 
 echo "add bundler and a few other rails gems"
-rvm install 2.0
-rvm use 2.0
+rvm install 2.3
+rvm use 2.3
 gem install bundler pg foreman thin --no-rdoc --no-ri
-
-echo "setup pip and virtualenv"
-sudo easy_install pip
-sudo pip install setuptools --no-use-wheel --upgrade
-sudo pip install virtualenvwrapper
-
-echo "add jedi globally for better python support in vim"
-sudo pip install jedi
 
 echo "finish the postgres setup"
 initdb /usr/local/var/postgres -E utf8
 
+echo "install python and pip"
+brew install python
+sudo pip install --upgrade pip setuptools
+
 echo "install the latest vim"
-brew install mercurial
-brew install vim
+brew install vim --with-lua
 
 echo "install zsh"
 brew install zsh
 
 echo "install exuberant-ctags"
-brew install ctags 
+brew install ctags
 sudo mv /usr/bin/ctags /usr/bin/ctags_orig
 
-echo "add GNU gettext and gettext-tools for django compile messages"
-brew install gettext
-brew link gettext --force
+echo "install nvm for better node version management"
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
 
 echo "Setting up homebrew-cask"
 brew tap phinze/homebrew-cask
@@ -79,27 +73,8 @@ brew cask install firefox
 echo "install iterm2"
 brew cask install iterm2
 
-echo "install pckeyboardhack"
-brew cask install pckeyboardhack
-
 echo "install sizeup"
 brew cask install sizeup
 
-echo "install flux"
-brew cask install flux
-
 echo "change the default shell to zsh"
 chsh -s /bin/zsh
-
-echo "silence rvm when its not the first item on the path"
-touch ~/.rvmrc
-echo rvm_silence_path_mismatch_check_flag=1 >> ~/.rvmrc
-
-echo "install nvm for better node version management"
-curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-
-echo "install virtualbox"
-brew cask install virtualbox
-
-echo "install vagrant"
-brew cask install vagrant
